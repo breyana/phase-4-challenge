@@ -8,7 +8,7 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(255) UNIQUE,
   email VARCHAR(255) UNIQUE,
-  photo VARCHAR(255),
+  photo VARCHAR(255) DEFAULT 'https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png',
   password VARCHAR(255),
   date_joined DATE DEFAULT now()
 );
