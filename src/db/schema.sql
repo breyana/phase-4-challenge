@@ -10,12 +10,12 @@ CREATE TABLE users (
   email VARCHAR(255) UNIQUE,
   photo VARCHAR(255),
   password VARCHAR(255),
-  date_joined DATE
+  date_joined DATE DEFAULT current_date
 );
 
 CREATE TABLE reviews (
   user_id INTEGER REFERENCES users ON DELETE CASCADE,
   album_id INTEGER REFERENCES albums ON DELETE CASCADE,
-  date_created DATE,
+  date_created DATE DEFAULT current_date,
   review VARCHAR(8000)
 );
