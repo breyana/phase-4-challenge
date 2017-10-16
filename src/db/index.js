@@ -14,6 +14,17 @@ function getAlbumsByID(albumID, cb) {
   _query('SELECT * FROM albums WHERE id = $1', [albumID], cb)
 }
 
+function createUser(user, cb) {
+  _query(`INSERT INTO users(username, email, photo, password)
+          VALUES($1, $2, $3, $4)`,
+          [user.username, user.email, user.photo, user.password]
+        )
+}
+
+function getUser(username, cb) {
+  _query(`SELECT * FROM users WHERE username = $1`, [username])
+}
+
 function _query(sql, variables, cb) {
   console.log('QUERY ->', sql.replace(/[\n\s]+/g, ' '), variables)
 
@@ -32,4 +43,6 @@ function _query(sql, variables, cb) {
 module.exports = {
   getAlbums,
   getAlbumsByID,
+  createUser,
+  getUser
 }
