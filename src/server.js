@@ -14,6 +14,11 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended: false}))
 
+app.use((req, res, next) => {
+  res.locals.user = undefined
+  next()
+})
+
 app.get('/', (req, res) => {
   db.getAlbums((error, albums) => {
     if (error) {
