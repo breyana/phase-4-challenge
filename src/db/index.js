@@ -16,8 +16,9 @@ function getAlbumsByID(albumID, cb) {
 
 function createUser(user, cb) {
   _query(`INSERT INTO users(username, email, photo, password)
-          VALUES($1, $2, $3, $4)`,
-          [user.username, user.email, user.photo, user.password]
+          VALUES($1, $2, $3, $4) RETURNING id`,
+          [user.username, user.email, user.photo, user.password],
+          cb
         )
 }
 
