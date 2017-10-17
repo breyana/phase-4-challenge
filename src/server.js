@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
+const session = require('express-session')
 const db = require('./db')
 
 const port = process.env.PORT || 3000
@@ -14,8 +15,21 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended: false}))
 
+app.use(session({
+  secret: 'temporary secret string',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }
+}))
+
 app.use((req, res, next) => {
-  res.locals.user = undefined
+  console.log('Request Session User',req.session.user)
+  if(req.session.user) {
+    res.locals.user = req.session.user
+  } else {
+    res.locals.user = undefined
+  }
+  res.locals.errorMessage = undefined
   next()
 })
 
@@ -38,6 +52,27 @@ app.get('/albums/:albumID', (req, res) => {
     } else {
       const album = albums[0]
       res.render('album', {album})
+    }
+  })
+})
+
+app.get('/sign-up', (req, res) => {
+  res.render('sign-up')
+})
+
+app.post('/sign-up', (req, res) => {
+  let errorMessage
+  if(req.body.password !== req.body['password-confirmation']) {
+    errorMessage = "Password does not match confirmation"
+    res.render('sign-up', {errorMessage})
+    return
+  }
+  db.createUser(req.body, (error, user) => {
+    if (error) {
+      res.status(500).render('error', {error})
+    } else {
+      req.session.user = user[0]
+      res.redirect('/')
     }
   })
 })
