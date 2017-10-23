@@ -24,9 +24,9 @@ app.use(session({
 
 app.use((req, res, next) => {
   if(req.session.user) {
-    res.locals.user = req.session.user
+    res.locals.session = req.session.user
   } else {
-    res.locals.user = undefined
+    res.locals.session = undefined
   }
   res.locals.errorMessage = undefined
   next()
