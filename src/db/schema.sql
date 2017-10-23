@@ -14,6 +14,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE reviews (
+  id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users ON DELETE CASCADE,
   album_id INTEGER REFERENCES albums ON DELETE CASCADE,
   date_created DATE DEFAULT now(),
