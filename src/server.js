@@ -110,6 +110,11 @@ app.post('/sign-in', (req, res) => {
   })
 })
 
+app.get('/sign-out', (req, res) => {
+  req.session.destroy()
+  res.redirect('/')
+})
+
 app.use((req, res) => {
   res.status(404).render('not_found')
 })
