@@ -26,6 +26,10 @@ function getUserByID(userID, cb) {
   _query(`SELECT * FROM users WHERE id = $1`, [userID], cb)
 }
 
+function getUserByLogin(username, cb) {
+  _query(`SELECT * from users WHERE username = $1`, [username], cb)
+}
+
 function _query(sql, variables, cb) {
   console.log('QUERY ->', sql.replace(/[\n\s]+/g, ' '), variables)
 
@@ -45,5 +49,6 @@ module.exports = {
   getAlbums,
   getAlbumsByID,
   createUser,
-  getUserByID
+  getUserByID,
+  getUserByLogin
 }

@@ -84,7 +84,28 @@ app.post('/sign-up', (req, res) => {
       res.status(500).render('error', {error})
     } else {
       req.session.user = user[0]
-      res.redirect('/')
+      res.redirect(`/users/${user[0].id}`)
+    }
+  })
+})
+
+app.get('/sign-in', (req, res) => {
+  res.render('sign-in')
+})
+
+app.post('/sign-in', (req, res) => {
+  const username = req.body.username
+  const password = req.body.password
+  let errorMessage
+  db.getUserByLogin(username, (error, user) => {
+    if (error) {
+      res.status(500).render('error', {error})
+    } else if (user[0].password !== password || !user[0]) {
+      errorMessage = "Incorrect username or password"
+      res.render('sign-in', {errorMessage})
+    } else {
+      req.session.user = user[0]
+      res.redirect(`/users/${user[0].id}`)
     }
   })
 })
