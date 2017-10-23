@@ -40,6 +40,16 @@ function getReviewsByUserID(userID, cb) {
         )
 }
 
+function getReviewsByAlbumID(albumID, cb) {
+  _query(`SELECT * FROM reviews
+          JOIN users ON users.id = reviews.user_id
+          JOIN albums ON albums.id = reviews.album_id
+          WHERE albums.id = $1
+          ORDER BY date_created DESC`,
+          [albumID], cb
+        )
+}
+
 function _query(sql, variables, cb) {
   console.log('QUERY ->', sql.replace(/[\n\s]+/g, ' '), variables)
 
@@ -61,5 +71,6 @@ module.exports = {
   createUser,
   getUserByID,
   getUserByLogin,
-  getReviewsByUserID
+  getReviewsByUserID,
+  getReviewsByAlbumID
 }

@@ -12,8 +12,28 @@
   <em>by <%= album.artist %></em>
 
   <h2>Reviews</h2>
-
-  <!-- TODO: implement album reviews -->
+  <div class="album-reviews">
+    <% reviews.forEach(review => { %>
+      <div class="review-container">
+        <div class="review">
+          <div class="review-info">
+            <div class="review-album-name">
+              <%=review.title%>
+            </div>
+            <div class="review-date">
+              <%=review.date_created%>
+            </div>
+          </div>
+          <div class="review-body">
+            <%=review.review%>
+          </div>
+          <div class="review-author">
+            By <%=review.username%>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
 
 </body>
 </html>

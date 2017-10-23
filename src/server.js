@@ -50,7 +50,13 @@ app.get('/albums/:albumID', (req, res) => {
       res.status(500).render('error', {error})
     } else {
       const album = albums[0]
-      res.render('album', {album})
+      db.getReviewsByAlbumID(albumID, (error, reviews) => {
+        if (error) {
+          res.status(500).render('error', {error})
+        } else {
+          res.render('album', {album, reviews})
+        }
+      })
     }
   })
 })
