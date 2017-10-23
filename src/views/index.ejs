@@ -19,5 +19,32 @@
     <% }) %>
   </div>
 
+  <h2>Recent Reviews</h2>
+
+  <div class="recent-reviews">
+    <% reviews.forEach(function(review) { %>
+      <div class="review-container">
+        <div class="review">
+          <div class="review-info">
+            <div class="review-album-name">
+              <a href="/albums/<%= review.album_id %>">
+                <%=review.title%>
+              </a>
+            </div>
+            <div class="review-date">
+              <%=review.date_created%>
+            </div>
+          </div>
+          <div class="review-body">
+            <%=review.review%>
+          </div>
+          <div class="review-author">
+            By <%=review.username%>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
 </body>
 </html>

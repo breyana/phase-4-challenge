@@ -50,6 +50,15 @@ function getReviewsByAlbumID(albumID, cb) {
         )
 }
 
+function getLatestReviews(cb) {
+  _query(`SELECT reviews.id, user_id, album_id, date_created, review, title, username FROM reviews
+          JOIN users ON users.id = reviews.user_id
+          JOIN albums ON albums.id = reviews.album_id
+          ORDER BY date_created DESC
+          LIMIT 3`, [], cb
+        )
+}
+
 function _query(sql, variables, cb) {
   console.log('QUERY ->', sql.replace(/[\n\s]+/g, ' '), variables)
 
@@ -72,5 +81,6 @@ module.exports = {
   getUserByID,
   getUserByLogin,
   getReviewsByUserID,
-  getReviewsByAlbumID
+  getReviewsByAlbumID,
+  getLatestReviews
 }
