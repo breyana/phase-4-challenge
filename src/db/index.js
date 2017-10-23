@@ -30,6 +30,16 @@ function getUserByLogin(email, cb) {
   _query(`SELECT * from users WHERE email = $1`, [email], cb)
 }
 
+function getReviewsByUserID(userID, cb) {
+  _query(`SELECT * FROM reviews
+          JOIN users ON users.id = reviews.user_id
+          JOIN albums ON albums.id = reviews.album_id
+          WHERE users.id = $1
+          ORDER BY date_created DESC`,
+          [userID], cb
+        )
+}
+
 function _query(sql, variables, cb) {
   console.log('QUERY ->', sql.replace(/[\n\s]+/g, ' '), variables)
 
@@ -50,5 +60,6 @@ module.exports = {
   getAlbumsByID,
   createUser,
   getUserByID,
-  getUserByLogin
+  getUserByLogin,
+  getReviewsByUserID
 }

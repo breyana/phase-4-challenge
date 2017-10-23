@@ -63,7 +63,9 @@ app.get('/users/:id', (req, res) => {
       res.status(500).render('error', {error})
     } else {
       const user = users[0]
-      res.render('profile', {user})
+      db.getReviewsByUserID(userID, (error, reviews) => {
+        res.render('profile', {user, reviews})
+      })
     }
   })
 })
