@@ -11,6 +11,10 @@
   <h1><%= album.title %></h1>
   <em>by <%= album.artist %></em>
 
+  <form action="/albums/<%= album.id %>/reviews/new">
+    <input type="submit" value="Add Review">
+  </form>
+
   <h2>Reviews</h2>
   <div class="album-reviews">
     <% reviews.forEach(review => { %>
