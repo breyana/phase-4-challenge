@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vinyl</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <script type="text/javascript" src="/script.js"></script>
+</head>
+<body>
+  <%- include nav.ejs %>
+  <div class="profile-photo">
+    <img src="<%=user.photo%>">
+  </div>
+  <h1><%=user.username%></h1>
+  <div class="user-info">
+    <div>Email: <%=user.email%></div>
+    <div>Date Joined: <%=user.date_joined%></div>
+  </div>
+
+
+
+</body>
+</html>
