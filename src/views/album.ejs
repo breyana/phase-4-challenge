@@ -30,6 +30,13 @@
           <div class="review-author">
             By <%=review.username%>
           </div>
+          <% if (user) { %>
+            <% if (review.user_id === user.id) { %>
+              <div class="review-delete-button" data-id="<%=review.id%>">
+                <img src="https://cdn3.iconfinder.com/data/icons/cleaning-icons/512/Trash_Can-128.png">
+              </div>
+            <% } %>
+          <% } %>
         </div>
       </div>
     <% }) %>
