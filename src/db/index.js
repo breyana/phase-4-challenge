@@ -31,7 +31,7 @@ function getUserByLogin(email, cb) {
 }
 
 function getReviewsByUserID(userID, cb) {
-  _query(`SELECT * FROM reviews
+  _query(`SELECT reviews.id, user_id, album_id, date_created, review, title, username FROM reviews
           JOIN users ON users.id = reviews.user_id
           JOIN albums ON albums.id = reviews.album_id
           WHERE users.id = $1
@@ -41,7 +41,7 @@ function getReviewsByUserID(userID, cb) {
 }
 
 function getReviewsByAlbumID(albumID, cb) {
-  _query(`SELECT * FROM reviews
+  _query(`SELECT reviews.id, user_id, album_id, date_created, review, title, username FROM reviews
           JOIN users ON users.id = reviews.user_id
           JOIN albums ON albums.id = reviews.album_id
           WHERE albums.id = $1
