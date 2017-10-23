@@ -22,8 +22,8 @@ function createUser(user, cb) {
         )
 }
 
-function getUser(username, cb) {
-  _query(`SELECT * FROM users WHERE username = $1`, [username])
+function getUserByID(userID, cb) {
+  _query(`SELECT * FROM users WHERE id = $1`, [userID], cb)
 }
 
 function _query(sql, variables, cb) {
@@ -45,5 +45,5 @@ module.exports = {
   getAlbums,
   getAlbumsByID,
   createUser,
-  getUser
+  getUserByID
 }

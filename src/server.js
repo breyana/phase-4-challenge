@@ -23,7 +23,6 @@ app.use(session({
 }))
 
 app.use((req, res, next) => {
-  console.log('Request Session User',req.session.user)
   if(req.session.user) {
     res.locals.user = req.session.user
   } else {
@@ -52,6 +51,19 @@ app.get('/albums/:albumID', (req, res) => {
     } else {
       const album = albums[0]
       res.render('album', {album})
+    }
+  })
+})
+
+app.get('/users/:id', (req, res) => {
+  const userID = req.params.id
+
+  db.getUserByID(userID, (error, users) => {
+    if (error) {
+      res.status(500).render('error', {error})
+    } else {
+      const user = users[0]
+      res.render('profile', {user})
     }
   })
 })
