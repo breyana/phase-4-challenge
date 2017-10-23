@@ -26,8 +26,8 @@ function getUserByID(userID, cb) {
   _query(`SELECT * FROM users WHERE id = $1`, [userID], cb)
 }
 
-function getUserByLogin(username, cb) {
-  _query(`SELECT * from users WHERE username = $1`, [username], cb)
+function getUserByLogin(email, cb) {
+  _query(`SELECT * from users WHERE email = $1`, [email], cb)
 }
 
 function _query(sql, variables, cb) {

@@ -94,10 +94,10 @@ app.get('/sign-in', (req, res) => {
 })
 
 app.post('/sign-in', (req, res) => {
-  const username = req.body.username
+  const email = req.body.email
   const password = req.body.password
   let errorMessage
-  db.getUserByLogin(username, (error, user) => {
+  db.getUserByLogin(email, (error, user) => {
     if (error) {
       res.status(500).render('error', {error})
     } else if (user[0].password !== password || !user[0]) {
