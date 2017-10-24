@@ -87,7 +87,23 @@ app.post('/albums/:albumID/reviews/new', (req, res) => {
       }
     })
   }
+})
 
+app.delete('/albums/reviews/:reviewID', (req, res) => {
+  if (!req.session.user) {
+    res.status(401).send('Unauthorized User')
+  } else {
+    const review = {}
+    review.id = req.params.reviewID
+    review.user_id = req.session.user.id
+    db.deleteReview(review, (error) => {
+      if (error) {
+        res.status(500).send('Error deleting review')
+      } else {
+        res.send('Review deleted sucessfully')
+      }
+    })
+  }
 })
 
 app.get('/albums/:albumID', (req, res) => {

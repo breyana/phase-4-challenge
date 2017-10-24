@@ -65,6 +65,10 @@ function addReview(review, cb) {
         )
 }
 
+function deleteReview(review, cb) {
+  _query(`DELETE FROM reviews WHERE id = $1 AND user_id = $2`, [review.id, review.user_id], cb)
+}
+
 function _query(sql, variables, cb) {
   console.log('QUERY ->', sql.replace(/[\n\s]+/g, ' '), variables)
 
@@ -89,5 +93,6 @@ module.exports = {
   getReviewsByUserID,
   getReviewsByAlbumID,
   getLatestReviews,
-  addReview
+  addReview,
+  deleteReview
 }
