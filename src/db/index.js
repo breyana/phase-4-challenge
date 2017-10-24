@@ -59,6 +59,12 @@ function getLatestReviews(cb) {
         )
 }
 
+function addReview(review, cb) {
+  _query(`INSERT INTO reviews(user_id, album_id, review) VALUES ($1, $2, $3)`,
+          [review.user_id, review.album_id, review.review], cb
+        )
+}
+
 function _query(sql, variables, cb) {
   console.log('QUERY ->', sql.replace(/[\n\s]+/g, ' '), variables)
 
@@ -82,5 +88,6 @@ module.exports = {
   getUserByLogin,
   getReviewsByUserID,
   getReviewsByAlbumID,
-  getLatestReviews
+  getLatestReviews,
+  addReview
 }

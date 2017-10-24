@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vinyl</title>
+</head>
+<body>
+  <%- include nav.ejs %>
+
+  <h1>New Review for <%= album.title %></h1>
+
+  <form action="/albums/<%= album.id %>/reviews/new" method="POST">
+    <div class="error">
+      <%=errorMessage%>
+    </div>
+    <div>
+      <textarea name="review" rows="8" cols="80" placeholder="Enter review here..."></textarea>
+    </div>
+    <input type="submit" value="Submit">
+  </form>
+
+</body>
+</html>

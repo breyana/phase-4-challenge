@@ -48,6 +48,48 @@ app.get('/', (req, res) => {
   })
 })
 
+app.get('/albums/:albumID/reviews/new', (req, res) => {
+  const albumID = req.params.albumID
+
+  db.getAlbumsByID(albumID, (error, albums) => {
+    if (error) {
+      res.status(500).render('error', {error})
+    } else {
+      const album = albums[0]
+      res.render('new_review', {album})
+    }
+  })
+})
+
+app.post('/albums/:albumID/reviews/new', (req, res) => {
+  const review = {}
+  review.review = req.body.review
+  review.album_id = req.params.albumID
+  review.user_id = req.session.user.id
+  let errorMessage
+
+  if(req.body.review === '') {
+    errorMessage = "Review cannot be blank"
+    db.getAlbumsByID(req.params.albumID, (error, albums) => {
+      if (error) {
+        res.status(500).render('error', {error})
+      } else {
+        const album = albums[0]
+        res.render('new_review', {album, errorMessage})
+      }
+    })
+  } else {
+    db.addReview(review, (error) => {
+      if (error) {
+        res.status(500).render('error', {error})
+      } else {
+        res.redirect(`/albums/${req.params.albumID}`)
+      }
+    })
+  }
+
+})
+
 app.get('/albums/:albumID', (req, res) => {
   const albumID = req.params.albumID
 
