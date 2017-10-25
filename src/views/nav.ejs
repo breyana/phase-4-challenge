@@ -1,7 +1,9 @@
 <nav>
-  <a href='/'>
-    <h1>Vinyl</h1>
-  </a>
+  <div class="site-name">
+    <a href='/'>
+      <h1>Vinyl</h1>
+    </a>
+  </div>
   <div class="navigation-links">
     <% if (session) { %>
       <a href="/users/<%=session.id%>">Profile</a>

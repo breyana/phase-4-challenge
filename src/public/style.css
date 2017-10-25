@@ -3,3 +3,9 @@ html, body {
   padding: 0;
   width: 100vw;
 }
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
