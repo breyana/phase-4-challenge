@@ -12,12 +12,6 @@ nav {
   padding: 10px;
 }
 
-.content-container {
-  display: flex;
-  width: 80%;
-  margin: 0 auto;
-}
-
 /* REVIEW SECTIONS */
 
 .review-info {
@@ -27,6 +21,11 @@ nav {
 
 /* HOME PAGE */
 
+.index-container, .profile-container {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+}
 
 .album-list {
   flex: 1;
@@ -40,4 +39,16 @@ nav {
   height: 100px;
   background-image: url('http://thegreatestyearinmusic.xpn.org/wp-content/uploads/2015/07/Albumcollage.gif');
   border-bottom-style: solid;
+}
+
+/* ALBUM PAGE */
+
+.album-container {
+  margin: 0 auto;
+  width: 80%;
+}
+
+/* PROFILE PAGE */
+.profile-photo {
+  height: 100px;
 }

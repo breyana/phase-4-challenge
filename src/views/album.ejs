@@ -7,44 +7,44 @@
 </head>
 <body>
   <%- include nav.ejs %>
+  <div class="album-container">
+    <h1><%= album.title %></h1>
+    <em>by <%= album.artist %></em>
 
-  <h1><%= album.title %></h1>
-  <em>by <%= album.artist %></em>
+    <form action="/albums/<%= album.id %>/reviews/new">
+      <input type="submit" value="Add Review">
+    </form>
 
-  <form action="/albums/<%= album.id %>/reviews/new">
-    <input type="submit" value="Add Review">
-  </form>
-
-  <h2>Reviews</h2>
-  <div class="album-reviews">
-    <% reviews.forEach(review => { %>
-      <div class="review-container">
-        <div class="review">
-          <div class="review-info">
-            <div class="review-album-name">
-              <%=review.title%>
-            </div>
-            <div class="review-date">
-              <%=review.date_created%>
-            </div>
-          </div>
-          <div class="review-body">
-            <%=review.review%>
-          </div>
-          <div class="review-author">
-            By <%=review.username%>
-          </div>
-          <% if (session) { %>
-            <% if (review.user_id === session.id) { %>
-              <div class="review-delete-button" data-id="<%=review.id%>">
-                <img src="https://cdn3.iconfinder.com/data/icons/cleaning-icons/512/Trash_Can-128.png">
+    <h2>Reviews</h2>
+    <div class="album-reviews">
+      <% reviews.forEach(review => { %>
+        <div class="review-container">
+          <div class="review">
+            <div class="review-info">
+              <div class="review-album-name">
+                <%=review.title%>
               </div>
+              <div class="review-date">
+                <%=review.date_created%>
+              </div>
+            </div>
+            <div class="review-body">
+              <%=review.review%>
+            </div>
+            <div class="review-author">
+              By <%=review.username%>
+            </div>
+            <% if (session) { %>
+              <% if (review.user_id === session.id) { %>
+                <div class="review-delete-button" data-id="<%=review.id%>">
+                  <img src="https://cdn3.iconfinder.com/data/icons/cleaning-icons/512/Trash_Can-128.png">
+                </div>
+              <% } %>
             <% } %>
-          <% } %>
+          </div>
         </div>
-      </div>
-    <% }) %>
+      <% }) %>
+    </div>
   </div>
-
 </body>
 </html>
